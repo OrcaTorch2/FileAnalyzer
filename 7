@@ -1,0 +1,49 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+int countLines(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cout << "Error: Failed to open the file." << std::endl;
+        return 0;
+    }
+
+    int lineCount = 0;
+    std::string line;
+    while (std::getline(file, line)) {
+        lineCount++;
+    }
+
+    file.close();
+    return lineCount;
+}
+
+int countWords(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cout << "Error: Failed to open the file." << std::endl;
+        return 0;
+    }
+
+    int wordCount = 0;
+    std::string word;
+    while (file >> word) {
+        wordCount++;
+    }
+
+    file.close();
+    return wordCount;
+}
+
+int main() {
+    std::string filename = "sample.txt";
+    int lineCount = countLines(filename);
+    int wordCount = countWords(filename);
+
+    std::cout << "File: " << filename << std::endl;
+    std::cout << "Line Count: " << lineCount << std::endl;
+    std::cout << "Word Count: " << wordCount << std::endl;
+
+    return 0;
+}
